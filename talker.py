@@ -1,5 +1,6 @@
 import serial
 from serial.tools.list_ports import comports
+from time import sleep
 
 
 class Talker:
@@ -7,11 +8,13 @@ class Talker:
 
     def __init__(self, timeout=1):
         # Detect the serial port
+        print("Initializing connection to game board...")
         port = self.find_serial_port()
         if not port:
-            print("No suitable serial port found!")
+            print("No suitable serial port found")
             exit()
         self.serial = serial.Serial(port, 115200, timeout=timeout)
+        print("Connected Successfully!")
 
     def find_serial_port(self):
         ports = comports()
@@ -28,6 +31,7 @@ class Talker:
         reply = reply.replace('>>> ','') # lines after first will be prefixed by a propmt
         if reply != text: # the line should be echoed, so the result should match
             raise ValueError('expected %s got %s' % (text, reply))
+        sleep(0.05) # give the board time to process the request
 
     def receive(self) -> str:
         line = self.serial.read_until(self.TERMINATOR)
