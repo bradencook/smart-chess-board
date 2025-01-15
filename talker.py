@@ -1,6 +1,5 @@
 import serial
 from serial.tools.list_ports import comports
-from time import sleep
 
 
 class Talker:
@@ -31,7 +30,7 @@ class Talker:
         reply = reply.replace('>>> ','') # lines after first will be prefixed by a propmt
         if reply != text: # the line should be echoed, so the result should match
             raise ValueError('expected %s got %s' % (text, reply))
-        sleep(0.05) # give the board time to process the request
+        
 
     def receive(self) -> str:
         line = self.serial.read_until(self.TERMINATOR)

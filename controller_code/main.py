@@ -42,14 +42,12 @@ def set_led(led, color):
 def set_brightness(val):
     pixels.brightness(val)
     
-
 def set_board(board):
     for i in range(len(board)):
         pixels.set_pixel(LED_ORDER[i], board[i])
 
 def show():
     pixels.show()
-    
 
 def read_signals():
     print(read_all_signals())

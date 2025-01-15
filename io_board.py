@@ -1,12 +1,14 @@
 from talker import Talker
+from time import sleep
 
-YELLOW = (200, 200, 0)
+YELLOW = (200, 200, 80)
 ORANGE = (255, 50, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 WHITE = (140, 140, 140)
 CYAN = (0, 255, 255)
+NONE = (0, 0, 0)
 
 # cells are numbered from bottom to top with a1 and a2 being 0 and 1 and g7 and g8 being 62 and 63
 
@@ -21,10 +23,17 @@ class IO_Board:
         self.emph = emph
 
         for i in range(64):
-            if i % 2 == 0:
-                self.default_board.append(dark)
-            else:
-                self.default_board.append(light)
+            if (i // 8) % 2 == 0: # even rows
+                if i % 2 == 0:
+                    self.default_board.append(dark)
+                else:
+                    self.default_board.append(light)
+            else: # odd rows
+                if i % 2 == 0:
+                    self.default_board.append(light)
+                else:
+                    self.default_board.append(dark)
+
             self.signals.append(1)
 
     def read_signals(self):
@@ -38,29 +47,35 @@ class IO_Board:
         self.signals = signals
 
     def highlight(self, cells):
-        # sets given array of cell values to the emph color
+        # sets given value or array of cell values to the emph color
         if type(cells) == int:
             cells = [cells]
         for cell in cells:
             self.talker.send(f"set_led({cell}, {self.emph})")
 
-    def restore(self, cells):
-        pass
-
     def set_default(self, cells):
-        # sets given array of cell values to their default color
-        pass
+        # sets given value or array of cell values to their default color
+        if type(cells) == int:
+            cells = [cells]
+        for cell in cells:
+            self.talker.send(f"set_led({cell}, {self.default_board[i]})")
 
     def set_board(self, board):
         # takes a whole array of color tuples to fill the board
-        pass
+        self.talker.send(f"set_board({board})")
 
     def set_cell(self, cell, color):
         # sets a specific cell a specific color tuple
-        pass
+        self.talker.send(f"set_led({cell}, {color})")
 
     def render(self):
+        # show led updates
         self.talker.send("show()")
+        sleep(0.05) # give the board time to process the request
+
+    def set_brightness(self, brightness):
+        # set the brighness 0 - 255
+        self.talker.send(f"set_brightness({brightness})")
 
 if __name__ == "__main__":
     board = IO_Board()
