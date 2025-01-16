@@ -9,6 +9,7 @@ RED = (255, 0, 0)
 WHITE = (140, 140, 140)
 CYAN = (0, 255, 255)
 NONE = (0, 0, 0)
+PINK = (255, 100, 100)
 
 # cells are numbered from bottom to top with a1 and a2 being 0 and 1 and g7 and g8 being 62 and 63
 
