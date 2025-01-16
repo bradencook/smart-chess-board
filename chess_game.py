@@ -109,37 +109,6 @@ class Chess_Game:
 
     def move(self, to_square):
         move = self.board.find_move(self.cell_to_move, to_square)
-        turn = self.board.turn
-
-        # if self.board.is_castling(move):
-        #     rook_from = None
-        #     rook_to = None
-        #     if self.board.is_kingside_castling(move):
-        #         rook_from = 7 if turn == chess.WHITE else 63
-        #         rook_to = 5 if turn == chess.WHITE else 61
-
-        #     if self.board.is_queenside_castling(move):
-        #         rook_from = 0 if turn == chess.WHITE else 56
-        #         rook_to = 3 if turn == chess.WHITE else 59
-
-        #     if rook_from in self.misplaced:
-        #         self.misplaced.remove(rook_from)
-        #     else:
-        #         self.misplaced.add(rook_from)
-
-        #     if rook_to in self.misplaced:
-        #         self.misplaced.remove(rook_to)
-        #     else:
-        #         self.misplaced.add(rook_to)
-
-        # if self.board.is_en_passant(move): # remove pawn
-        #     pawn = to_square - 8 if turn == chess.WHITE else to_square + 8
-        #     if pawn in self.misplaced:
-        #         self.misplaced.remove(pawn)
-        #     else:
-        #         self.misplaced.add(pawn)
-
-
         self.board.push(move)
         print(f"Move made: {self.board.peek()}")
         print(self.board)
@@ -147,7 +116,6 @@ class Chess_Game:
 
         # reset error handling
         self.misplaced.clear()
-        io_pieces = set()
         for i in range(len(self.io.signals)):
             if self.io.signals[i] == 0 and self.board.piece_at(i) is None: 
                 self.misplaced.add(i)
