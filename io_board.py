@@ -72,7 +72,7 @@ class IO_Board:
     def render(self):
         # show led updates
         self.talker.send("show()")
-        sleep(0.05) # give the board time to process the request
+        sleep(0.01) # give the board time to process the request
 
     def set_brightness(self, brightness):
         # set the brighness 0 - 255
@@ -90,5 +90,5 @@ if __name__ == "__main__":
                     if board.signals[i] == 0: # piece present
                         board.highlight(i)
                     else:
-                        board.restore(i)
+                        board.set_default(i)
         board.render()

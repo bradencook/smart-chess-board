@@ -34,11 +34,14 @@ class Chess_Game:
             self.update()
             self.render()
         self.handle_results(self.board.outcome())
+        if self.engine:
+            self.engine.quit()
+        exit()
 
     def update(self):
         if not self.suggested_move:
             if (self.board.turn == chess.WHITE and self.engine_white) or (self.board.turn == chess.BLACK and self.engine_black):
-                self.suggested_move = self.engine.play(self.board, chess.engine.Limit(time=0.1)).move
+                self.suggested_move = self.engine.play(self.board, chess.engine.Limit(time=0.00001, depth=1)).move
         if self.io.signals != self.io.prev_signals: # handle changes in piece position
             for i in range(len(self.io.signals)):
                 current, prev = self.io.signals[i], self.io.prev_signals[i]
