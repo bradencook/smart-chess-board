@@ -46,7 +46,7 @@ class Othello:
         for square in self.board:
             if square.side == 0:
                 blue_cnt += 1
-            if square.side == 0:
+            if square.side == 1:
                 green_cnt += 1
         if blue_cnt > green_cnt:
             return f"Blue wins! {blue_cnt}-{green_cnt}"
