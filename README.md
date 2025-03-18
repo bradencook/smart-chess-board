@@ -7,4 +7,4 @@ or whatever
 documentation
 
 
-<a href="https://www.icloud.com/iclouddrive/0c8vzy5ZYtlnNBjTi_IuLpAqg#Chess">Chessv Video</a>
+<a href="https://www.icloud.com/iclouddrive/0c8vzy5ZYtlnNBjTi_IuLpAqg#Chess">Chess Video</a>
