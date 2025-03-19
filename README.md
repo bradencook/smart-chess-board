@@ -7,4 +7,4 @@ or whatever
 documentation
 
 
-[Discover the full project in action on YouTube](https://www.youtube.com/watch?v=n_iB6XPZ-YA)
+[See this project come to life on YouTube](https://www.youtube.com/watch?v=n_iB6XPZ-YA)
